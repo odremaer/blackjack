@@ -14,7 +14,6 @@ class Player
     2.times do
       card = deck.give_card
       @cards << card
-      puts @cards
     end
   end
 
@@ -50,9 +49,11 @@ class Player
   end
 
   def show_cards
+    cards = []
     @cards.each do |card|
-      card.each_key { |name| print "#{name} " }
+      card.each_key { |name| cards << name }
     end
+    return cards
   end
 
   def make_a_bet(bank)
