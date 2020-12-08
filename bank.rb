@@ -1,5 +1,5 @@
 require_relative 'player'
-# require_relative 'dealer'
+require_relative 'dealer'
 
 class Bank
   attr_accessor :current_bank
