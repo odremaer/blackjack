@@ -2,7 +2,7 @@ require_relative 'deck'
 require_relative 'bank'
 
 class Dealer
-  attr_accessor :bank
+  attr_accessor :cards, :bank
 
   def initialize
     @cards = []
@@ -13,7 +13,6 @@ class Dealer
     2.times do
       card = deck.give_card
       @cards << card
-      puts @cards
     end
   end
 
@@ -47,5 +46,17 @@ class Dealer
   def make_a_bet(bank)
     bank.current_bank += 10
     @bank -= 10
+  end
+
+  def show_cards
+    cards = []
+    @cards.each do |card|
+      card.each_key { |name| cards << name }
+    end
+    return cards
+  end
+
+  def drop_cards
+    @cards = []
   end
 end
