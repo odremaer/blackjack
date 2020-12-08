@@ -17,7 +17,7 @@ class Dealer
   end
 
   def take_one_more_card(deck)
-    if @cards.length == 3 or current_points >= 17
+    if (@cards.length == 3) || (current_points >= 17)
       nil
     else
       card = deck.give_card
@@ -29,18 +29,18 @@ class Dealer
     points = 0
     @cards.each do |card|
       card.each_value do |value|
-        if value != [1,11]
-          points += value
-        else
-          if points <= 10
-            points += 11
-          else
-            points += 1
-          end
-        end
+        points += if value != [1, 11]
+                    value
+                  else
+                    if points <= 10
+                      11
+                    else
+                      1
+                    end
+                  end
       end
     end
-    return points
+    points
   end
 
   def make_a_bet(bank)
@@ -53,7 +53,7 @@ class Dealer
     @cards.each do |card|
       card.each_key { |name| cards << name }
     end
-    return cards
+    cards
   end
 
   def drop_cards

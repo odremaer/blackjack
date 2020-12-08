@@ -30,18 +30,18 @@ class Player
     points = 0
     @cards.each do |card|
       card.each_value do |value|
-        if value != [1,11]
-          points += value
-        else
-          if points <= 10
-            points += 11
-          else
-            points += 1
-          end
-        end
+        points += if value != [1, 11]
+                    value
+                  else
+                    if points <= 10
+                      11
+                    else
+                      1
+                    end
+                  end
       end
     end
-    return points
+    points
   end
 
   def drop_cards
@@ -53,7 +53,7 @@ class Player
     @cards.each do |card|
       card.each_key { |name| cards << name }
     end
-    return cards
+    cards
   end
 
   def make_a_bet(bank)

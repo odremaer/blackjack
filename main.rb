@@ -19,9 +19,7 @@ class Interface
   end
 
   def player_turn
-    if @player.cards.length == 3 and @dealer.cards.length == 3
-      game_end
-    end
+    game_end if (@player.cards.length == 3) && (@dealer.cards.length == 3)
     print "Ваши карты - #{@player.show_cards}, сумма очков - #{@player.current_points}\n"\
           "Карт у диллера - #{'*' * @dealer.cards.length}\n"\
           "В банке находится - #{@bank.current_bank}\n"\
@@ -46,19 +44,17 @@ class Interface
   end
 
   def dealer_turn
-    if @dealer.current_points <= 17
-      @dealer.take_one_more_card(@deck)
-    end
+    @dealer.take_one_more_card(@deck) if @dealer.current_points <= 17
     player_turn
   end
 
   def game_end
     print "Ваши карты - #{@player.show_cards}, ваши очки - #{@player.current_points}\n"\
           "Карты диллера - #{@dealer.show_cards}, очки диллера - #{@dealer.current_points}\n"
-    if @player.current_points == @dealer.current_points and @player.current_points <= 21 and @dealer.current_points <= 21
+    if (@player.current_points == @dealer.current_points) && (@player.current_points <= 21) && (@dealer.current_points <= 21)
       print "Ничья!\n"
       @bank.draw(@player, @dealer)
-    elsif @player.current_points >= @dealer.current_points and @player.current_points <= 21
+    elsif (@player.current_points >= @dealer.current_points) && (@player.current_points <= 21)
       print "Вы выиграли!\n"
       @bank.player_wins(@player)
     else
@@ -68,12 +64,12 @@ class Interface
     @player.drop_cards
     @dealer.drop_cards
 
-    if @player.bank == 0
+    if @player.bank.zero?
       print "У вас закончились деньги, вы проиграли\n"
       return nil
     end
 
-    if @dealer.bank == 0
+    if @dealer.bank.zero?
       print "У диллера закончились деньги, вы выиграли!\n"
       return nil
     end

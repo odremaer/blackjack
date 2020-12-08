@@ -6,6 +6,7 @@ end
 
 class Deck
   attr_accessor :playable_deck
+
   Deck = {
     '2♠' => 2,
     '2♥' => 2,
@@ -55,22 +56,20 @@ class Deck
     'K♥' => 10,
     'K♣' => 10,
     'K♦' => 10,
-    'A♠' => [1,11],
-    'A♥' => [1,11],
-    'A♣' => [1,11],
-    'A♦' => [1,11],
-  }
+    'A♠' => [1, 11],
+    'A♥' => [1, 11],
+    'A♣' => [1, 11],
+    'A♦' => [1, 11]
+  }.freeze
   def initialize
     @playable_deck = Deck.dup
   end
 
   def give_card
-    if @playable_deck.empty?
-      update_deck
-    end
+    update_deck if @playable_deck.empty?
     card = @playable_deck.sample(1)
     @playable_deck.delete(card.keys[0])
-    return card
+    card
   end
 
   protected
