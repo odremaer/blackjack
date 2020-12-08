@@ -66,7 +66,6 @@ class Deck
 
   def give_card
     if @playable_deck.empty?
-      puts 'новая колода'
       update_deck
     end
     card = @playable_deck.sample(1)
@@ -77,7 +76,6 @@ class Deck
   protected
 
   def update_deck
-    @playable_deck = Deck
+    @playable_deck = Deck.dup
   end
-
 end
