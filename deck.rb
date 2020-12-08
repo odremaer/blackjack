@@ -61,12 +61,14 @@ class Deck
     'A♣' => [1, 11],
     'A♦' => [1, 11]
   }.freeze
+  
   def initialize
     @playable_deck = Deck.dup
   end
 
   def give_card
     update_deck if @playable_deck.empty?
+    # sample method for Hash object returns random pair
     card = @playable_deck.sample(1)
     @playable_deck.delete(card.keys[0])
     card
