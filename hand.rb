@@ -17,14 +17,12 @@ class Hand
         points += card.value
       elsif card.card =~ /[JDK]/
         points += card.value
-      elsif card.card =~ /[T]/
+      elsif card.card =~ /T/
         points += card.value
         t_founded = true
       end
     end
-    if t_founded and points > 21
-      points -= 10
-    end
+    points -= 10 if t_founded && (points > 21)
     points
   end
 

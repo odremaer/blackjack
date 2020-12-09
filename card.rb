@@ -4,16 +4,16 @@ class Card
   CARDS = %w[2 3 4 5 6 7 8 9 10 J D K T].freeze
   SUITS = ['♠', '♥', '♣', '♦'].freeze
 
-  def initialize(card=nil, suit=nil)
+  def initialize(card = nil, suit = nil)
     @card = card
     @suit = suit
     @value = if card =~ /[0-910]/
-                card.to_i
-              elsif card =~ /[JDK]/
+               card.to_i
+             elsif card =~ /[JDK]/
                10
-             elsif card =~ /[T]/
+             elsif card =~ /T/
                11
-              end
+             end
   end
 
   def cards
