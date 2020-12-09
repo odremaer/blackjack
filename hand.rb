@@ -14,11 +14,11 @@ class Hand
     points = 0
     @cards.each do |card|
       if card.card =~ /[0-910]/
-        points += card.value
+        points += card.card.to_i
       elsif card.card =~ /[JDK]/
-        points += card.value
+        points += 10
       elsif card.card =~ /T/
-        points += card.value
+        points += 11
         t_founded = true
       end
     end
