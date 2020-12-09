@@ -5,7 +5,6 @@ class Deck
 
   def initialize
     @playable_deck = []
-    @card = Card.new
   end
 
   def give_card
@@ -16,8 +15,8 @@ class Deck
   end
 
   def update_deck
-    @card.cards.each do |cur_card|
-      @card.suits.each do |cur_suit|
+    Card::CARDS.each do |cur_card|
+      Card::SUITS.each do |cur_suit|
         @playable_deck << Card.new(cur_card, cur_suit)
       end
     end
