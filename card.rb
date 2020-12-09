@@ -7,7 +7,7 @@ class Card
   def initialize(card=nil, suit=nil)
     @card = card
     @suit = suit
-    @value = if card =~ /^[0-910]$/
+    @value = if card =~ /[0-910]/
                 card.to_i
               elsif card =~ /[JDK]/
                10
