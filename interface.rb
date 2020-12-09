@@ -1,7 +1,7 @@
 class Interface
   def main_message(player, dealer, bank)
-    print "Ваши карты - #{player.show_cards}, сумма очков - #{player.current_points}\n"\
-          "Карт у диллера - #{'*' * dealer.cards.length}\n"\
+    print "Ваши карты - #{player.hand.show_cards}, сумма очков - #{player.hand.current_points}\n"\
+          "Карт у диллера - #{'*' * dealer.hand.cards.length}\n"\
           "В банке находится - #{bank.current_bank}\n"\
           "Ваши деньги - #{player.bank}, деньги диллера - #{dealer.bank}\n"\
           "Что вы хотите сделать?\n"\
@@ -17,8 +17,8 @@ class Interface
   end
 
   def point_from_both_sides(player, dealer)
-    print "Ваши карты - #{player.show_cards}, ваши очки - #{player.current_points}\n"\
-          "Карты диллера - #{dealer.show_cards}, очки диллера - #{dealer.current_points}\n"
+    print "Ваши карты - #{player.hand.show_cards}, ваши очки - #{player.hand.current_points}\n"\
+          "Карты диллера - #{dealer.hand.show_cards}, очки диллера - #{dealer.hand.current_points}\n"
   end
 
   def more_than_3_cards
