@@ -1,82 +1,24 @@
-class Hash
-  def sample(n)
-    Hash[to_a.sample(n)]
-  end
-end
+require_relative 'card'
 
 class Deck
   attr_accessor :playable_deck
 
-  Deck = {
-    '2♠' => 2,
-    '2♥' => 2,
-    '2♣' => 2,
-    '2♦' => 2,
-    '3♠' => 3,
-    '3♥' => 3,
-    '3♣' => 3,
-    '3♦' => 3,
-    '4♠' => 4,
-    '4♥' => 4,
-    '4♣' => 4,
-    '4♦' => 4,
-    '5♠' => 5,
-    '5♥' => 5,
-    '5♣' => 5,
-    '5♦' => 5,
-    '6♠' => 6,
-    '6♥' => 6,
-    '6♣' => 6,
-    '6♦' => 6,
-    '7♠' => 7,
-    '7♥' => 7,
-    '7♣' => 7,
-    '7♦' => 7,
-    '8♠' => 8,
-    '8♥' => 8,
-    '8♣' => 8,
-    '8♦' => 8,
-    '9♠' => 9,
-    '9♥' => 9,
-    '9♣' => 9,
-    '9♦' => 9,
-    '10♠' => 10,
-    '10♥' => 10,
-    '10♣' => 10,
-    '10♦' => 10,
-    'J♠' => 10,
-    'J♥' => 10,
-    'J♣' => 10,
-    'J♦' => 10,
-    'D♠' => 10,
-    'D♥' => 10,
-    'D♣' => 10,
-    'D♦' => 10,
-    'K♠' => 10,
-    'K♥' => 10,
-    'K♣' => 10,
-    'K♦' => 10,
-    'A♠' => [1, 11],
-    'A♥' => [1, 11],
-    'A♣' => [1, 11],
-    'A♦' => [1, 11]
-  }.freeze
-  
   def initialize
-    @playable_deck = Deck.dup
+    @playable_deck = []
   end
 
-  def give_card
-    update_deck if @playable_deck.empty?
-    # sample method for Hash object returns random pair
-    card = @playable_deck.sample(1)
-    @playable_deck.delete(card.keys[0])
-    card
+  def give_card(card)
+    update_deck(card) if @playable_deck.empty?
+    cur_card = @playable_deck.sample
+    @playable_deck.delete(cur_card)
+    cur_card
   end
 
-  protected
-
-  def update_deck
-    @playable_deck = Deck.dup
+  def update_deck(card)
+    card.card.each do |cur_card|
+      card.suit.each do |cur_suit|
+        @playable_deck << { cur_card => cur_suit }
+      end
+    end
   end
 end

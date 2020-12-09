@@ -9,28 +9,30 @@ class Dealer
     @bank = 100
   end
 
-  def take_cards(deck)
+  def take_cards(deck, card)
     2.times do
-      card = deck.give_card
-      @cards << card
+      cur_card = deck.give_card(card)
+      @cards << cur_card
     end
   end
 
-  def take_one_more_card(deck)
+  def take_one_more_card(deck, card)
     if (@cards.length == 3) || (current_points >= 17)
       nil
     else
-      card = deck.give_card
-      @cards << card
+      cur_card = deck.give_card(card)
+      @cards << cur_card
     end
   end
 
   def current_points
     points = 0
     @cards.each do |card|
-      card.each_value do |value|
-        points += if value != [1, 11]
-                    value
+      card.each_key do |key|
+        points += if key =~ /^[0-910]$/
+                    key.to_i
+                  elsif key =~ /[JDK]/
+                    10
                   else
                     if points <= 10
                       11
@@ -51,7 +53,7 @@ class Dealer
   def show_cards
     cards = []
     @cards.each do |card|
-      card.each_key { |name| cards << name }
+      card.each { |card, suit| cards << card + suit }
     end
     cards
   end
